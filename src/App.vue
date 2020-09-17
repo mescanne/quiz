@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Quiz :questions="questions"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Quiz from './components/Quiz.vue'
+import Question from './quiz.js'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Quiz,
+  },
+  created() {
+    //console.log('questoins: ', this.$data.questions)
+  },
+  data: function() {
+    return {
+      questions: Question.timesTableQuestions(5, true, true),
+    };
   }
 }
 </script>
@@ -23,6 +31,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
