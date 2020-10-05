@@ -7,8 +7,8 @@
   "background_color": "#fff",
   "icons": [
     {
-      "src": "img/icons/KidsQuizLogo.svg",
-      "sizes": "111x111",
+      "src": "public/img/icons/KidsQuizLogo.svg",
+      "sizes": "151x151",
       "type": "image/svg+xml"
     }
   ]
