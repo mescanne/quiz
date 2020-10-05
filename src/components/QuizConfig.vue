@@ -14,15 +14,15 @@
     <b-tabs>
       <b-tab-item label="Adding">
       <div class="columns is-multiine is-centered is-multiline">
-        <div class="column is-narrow" v-for="n in 10" :key="n">
-          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchAddingToSum(n)">Launch</b-button></footer></div></div>
+        <div class="column is-narrow" v-for="n in 7" :key="n">
+          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n + 3 }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchAddingToSum(n+3)">Launch</b-button></footer></div></div>
         </div>
       </div>
       </b-tab-item>
       <b-tab-item label="Times Table">
       <div class="columns is-multiine is-centered is-multiline">
-        <div class="column is-narrow" v-for="n in 12" :key="n">
-          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchTimesTable(n)">Launch</b-button></footer></div></div>
+        <div class="column is-narrow" v-for="n in 11" :key="n">
+          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n+1 }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchTimesTable(n+1)">Launch</b-button></footer></div></div>
         </div>
       </div>
       </b-tab-item>
