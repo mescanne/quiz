@@ -1,35 +1,64 @@
 <template>
   <div class="container">
-    <b-checkbox v-model="timesTable" native-value="1">1</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="2">2</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="3">3</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="4">4</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="5">5</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="6">6</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="7">7</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="8">8</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="9">9</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="10">10</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="11">11</b-checkbox>
-    <b-checkbox v-model="timesTable" native-value="12">12</b-checkbox>
-    <b-switch v-model="withReorder">Reorder</b-switch>
-    <b-switch v-model="withDivision">Division</b-switch>
+    <b-switch v-model="withSound">Sound</b-switch>
+    <b-field label="Questions">
+      <b-select v-model="questionCount" placeholder="10">
+        <option value="2">2</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+      </b-select>
+    </b-field>
+
+    <b-tabs>
+      <b-tab-item label="Adding">
+      <div class="columns is-multiine is-centered is-multiline">
+        <div class="column is-narrow" v-for="n in 10" :key="n">
+          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchAddingToSum(n)">Launch</b-button></footer></div></div>
+        </div>
+      </div>
+      </b-tab-item>
+      <b-tab-item label="Times Table">
+      <div class="columns is-multiine is-centered is-multiline">
+        <div class="column is-narrow" v-for="n in 12" :key="n">
+          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchTimesTable(n)">Launch</b-button></footer></div></div>
+        </div>
+      </div>
+      </b-tab-item>
+    </b-tabs>
   </div>
 </template>
 
 <script>
 
+import Question from '../quiz.js'
+import router from '../router'
+
 export default {
   name: 'QuizConfig',
   data: function() {
     return {
+      questionSets: ['a', 'b', 'c'],
       timesTable: [],
+      withReorder: false,
+      withDivision: false,
+      withSound: true,
+      questionCount: 10,
     }
   },
   props: {
     questions: Array,
   },
   methods: {
+    launchTimesTable: function(n) {
+      let questions = Question.timesTableQuestions(n, false, true).slice(0, this.$data.questionCount);
+      router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
+    },
+    launchAddingToSum: function(n) {
+      let questions = Question.addingQuestions(Math.floor(n/2), n).slice(0, this.$data.questionCount);
+      router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
+    },
   }
 }
 
@@ -37,4 +66,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.c {
+	margin: 10px 10px 10px 10px;
+}
 </style>

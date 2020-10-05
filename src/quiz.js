@@ -15,17 +15,27 @@ function timesTableQuestions(number, withReorder, withDivide) {
   let questions = [];
   while (idx <= maxTimesTable) {
     let answer = number * idx;
-    questions.push(Question(true, number + ' × ' + idx, number + ' times ' + idx, answer));
+    questions.push(Question(true, idx + ' × ' + number, idx + ' times ' + number, answer));
     if (withReorder) {
-      questions.push(Question(true, idx + ' × ' + number, idx + ' times ' + number, answer));
+      questions.push(Question(true, number + ' × ' + idx, number + ' times ' + idx, answer));
     }
     if (withDivide) {
       questions.push(Question(true, answer + ' ÷ ' + number, answer + ' divided by ' + number, idx));
-      if (withReorder && idx > 0) {
-        questions.push(Question(true, answer + ' ÷ ' + idx, answer + ' divided by ' + idx, number));
-      }
     }
     idx ++;
+  }
+  shuffle(questions);
+  return questions;
+}
+
+function addingQuestions(minSum, maxSum) {
+  let questions = [];
+  for (let sum = minSum; sum < maxSum; sum++) {
+    for (let i = 0; i < sum; i++) {
+      let j = sum - i;
+      questions.push(Question(true, i + ' + ' + j, i + ' plus ' + j, sum));
+      questions.push(Question(true, j + ' + ' + i, j + ' plus ' + i, sum));
+    }
   }
   shuffle(questions);
   return questions;
@@ -41,6 +51,7 @@ function shuffle(questions) {
 export default {
   Question,
   timesTableQuestions,
+  addingQuestions,
   shuffle,
 }
 

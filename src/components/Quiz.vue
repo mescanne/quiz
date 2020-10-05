@@ -28,6 +28,7 @@ export default {
   },
   props: {
     questions: Array,
+    withSound: Boolean,
   },
   mounted() {
     this.nextQuestion(); 
@@ -35,8 +36,14 @@ export default {
   methods: {
     onEnter: function() {
       this.$data.answerDisabled = true;
-      window.speechSynthesis.cancel();
+      console.log('data: ', this.$data);
+      if (this.withSound) {
+        window.speechSynthesis.cancel();
+      }
       let delay = 200;
+      if (!this.withSound) {
+        delay = 1000;
+      }
       if (this.$data.answer == this.questions[this.$data.currentQuestion].answer) {
         this.showStatus('Correct!', '');
         this.$data.correct += 1;
@@ -85,10 +92,12 @@ export default {
     },
     sayMessage: function(msg) {
        let nmsg = msg.replace('×', 'times');
-       window.speechSynthesis.speak(new SpeechSynthesisUtterance(nmsg));
+       if (this.withSound) {
+         window.speechSynthesis.speak(new SpeechSynthesisUtterance(nmsg));
+       }
     },
     delayAfterSpeaking: function(delay) {
-      if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+      if (this.withSound && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
         let delayAgain = this.delayAfterSpeaking;
         setTimeout(function() {
           delayAgain(delay);

@@ -16,13 +16,13 @@ new Vue({
   router,
   created() {
     firebase.initializeApp(config);
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
-        this.$router.push('/success')
-      } else {
-        this.$router.push('/auth')
-      }
-    });
+    //firebase.auth().onAuthStateChanged((user) => {
+    //  if(user) {
+    //    this.$router.push('/success')
+    //  } else {
+    //    this.$router.push('/auth')
+    //  }
+    //});
   },
   render: h => h(App),
 }).$mount('#app')
