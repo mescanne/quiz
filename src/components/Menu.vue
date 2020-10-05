@@ -1,10 +1,10 @@
 <template>
     <b-navbar>
         <template slot="brand">
-            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            <b-navbar-item> <!-- tag="router-link" :to="{ path: '/' }"> -->
                 <img
-                    src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
-                    alt="Lightweight UI components for Vue.js based on Bulma"
+                    src="img/KidsQuizTitle.svg"
+                    alt="Kids Quiz"
                 >
             </b-navbar-item>
         </template>
@@ -13,7 +13,7 @@
                 Home
             </b-navbar-item>
             <b-navbar-item href="#">
-                Documentation
+                Restart
             </b-navbar-item>
             <b-navbar-dropdown label="Info">
                 <b-navbar-item href="#">

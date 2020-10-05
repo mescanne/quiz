@@ -21,7 +21,7 @@ function timesTableQuestions(number, withReorder, withDivide) {
     }
     if (withDivide) {
       questions.push(Question(true, answer + ' ÷ ' + number, answer + ' divided by ' + number, idx));
-      if (withReorder) {
+      if (withReorder && idx > 0) {
         questions.push(Question(true, answer + ' ÷ ' + idx, answer + ' divided by ' + idx, number));
       }
     }

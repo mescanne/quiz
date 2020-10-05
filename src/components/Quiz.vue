@@ -1,12 +1,12 @@
 <template>
-  <div style="padding:10%; font-size:80px;">
-    <div style="padding-bottom:20px; text-align:center;">{{ questionCount }}</div>
+  <div style="padding:5%; font-size:80px;">
+    <div style="padding-bottom:20px; font-size:20px; text-align:center;">{{ questionCount }}</div>
     <div style="padding-bottom:20px; text-align:center;">{{ question }}</div>
     <div style="height: 100px; display:flex; justify-content:center;">
-      <input ref="answer" v-bind:disabled="answerDisabled" style="width:5ch; height:100%; text-align:center; font-size:80px;" v-on:keyup.enter="onEnter" v-model.number="answer" type="number">
+      <input ref="answer" v-bind:disabled="answerDisabled" class="no-spinners" style="width:5ch; height:100%; text-align:center; font-size:80px;" v-on:keyup.enter="onEnter" v-model.number="answer" type="number">
     </div>
-    <div style="height: 100px; display:flex; text-align:center; justify-content:center; margin-top:20px; font-style: italic; font-color:gray;">{{ statusMsg }}</div>
-    <div style="height: 100px; display:flex; text-align:center; justify-content:center; margin-top:20px; font-style: italic; font-color:gray;">{{ explanation }}</div>
+    <div style="height: 60px; font-size:40px; display:flex; text-align:center; justify-content:center; margin-top:20px; font-style: italic; font-color:gray;">{{ statusMsg }}</div>
+    <div style="height: 60px; font-size:40px; display:flex; text-align:center; justify-content:center; margin-top:20px; font-style: italic; font-color:gray;">{{ explanation }}</div>
   </div>
 </template>
 
@@ -30,12 +30,10 @@ export default {
     questions: Array,
   },
   mounted() {
-    console.log('questions: ', this.questions);
     this.nextQuestion(); 
   },
   methods: {
     onEnter: function() {
-      console.log('on enter: ', this.$data.answer);
       this.$data.answerDisabled = true;
       window.speechSynthesis.cancel();
       let delay = 200;
@@ -50,7 +48,6 @@ export default {
       this.delayAfterSpeaking(delay);
     },
     nextQuestion: function() {
-      console.log('Next question!');
       this.showStatus('', '');
       if (this.$data.currentQuestion < this.questions.length) {
         this.showQuestion();
@@ -62,7 +59,7 @@ export default {
         } else if (perc >= 0.75) {
           msg = 'Good.';
         } 
-        this.showStatus(this.$data.correct + ' out of ' + this.questions.length + ' correct.\n' + msg);
+        this.showStatus(this.$data.correct + ' of ' + this.questions.length + ' correct.', msg);
       }
     },
     showQuestion: function() {
@@ -98,7 +95,7 @@ export default {
         }, 100);
         return;
       }
-      setTimeout(this.showQuestion, delay);
+      setTimeout(this.nextQuestion, delay);
     }
   }
 }
@@ -107,4 +104,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.no-spinners {
+  -moz-appearance:textfield;
+}
+
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 </style>

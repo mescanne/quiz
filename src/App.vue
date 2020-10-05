@@ -1,24 +1,37 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
+     <router-view></router-view> 
+  <!--
+    <Menu/>
     <Quiz :questions="questions"/>
+    <QuizConfig/>
+-->
   </div>
 </template>
 
 <script>
-import Quiz from './components/Quiz.vue'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+//import Menu from './components/Menu.vue'
+//import Quiz from './components/Quiz.vue'
 import Question from './quiz.js'
+//import QuizConfig from './components/QuizConfig.vue'
+
+Vue.use(VueRouter);
 
 export default {
   name: 'App',
   components: {
-    Quiz,
+    //Menu,
+    //Quiz,
+    //QuizConfig,
   },
   created() {
     //console.log('questoins: ', this.$data.questions)
   },
   data: function() {
     return {
-      questions: Question.timesTableQuestions(5, true, true),
+      questions: Question.timesTableQuestions(5, true, true).slice(0,2),
     };
   }
 }
