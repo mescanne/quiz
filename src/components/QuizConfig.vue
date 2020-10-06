@@ -12,17 +12,18 @@
     </b-field>
 
     <b-tabs>
-      <b-tab-item label="Adding">
-      <div class="columns is-multiine is-centered is-multiline">
-        <div class="column is-narrow" v-for="n in 7" :key="n">
-          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n + 3 }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchAddingToSum(n+3)">Launch</b-button></footer></div></div>
+      <b-tab-item label="Times Table">
+      <div class="columns is-multiline is-centered is-multiline">
+        <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">2, 5, 10</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchMultipleTimesTable([2,5,10])">Launch</b-button></footer></div></div>
+        <div v-for="n in 11" :key="n">
+          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n+1 }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchTimesTable(n+1)">Launch</b-button></footer></div></div>
         </div>
       </div>
       </b-tab-item>
-      <b-tab-item label="Times Table">
+      <b-tab-item label="Adding">
       <div class="columns is-multiine is-centered is-multiline">
-        <div class="column is-narrow" v-for="n in 11" :key="n">
-          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n+1 }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchTimesTable(n+1)">Launch</b-button></footer></div></div>
+        <div v-for="n in 7" :key="n">
+          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n + 3 }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchAddingToSum(n+3)">Launch</b-button></footer></div></div>
         </div>
       </div>
       </b-tab-item>
@@ -44,13 +45,22 @@ export default {
       withReorder: false,
       withDivision: false,
       withSound: true,
-      questionCount: 10,
+      questionCount: 20,
     }
   },
   props: {
     questions: Array,
   },
   methods: {
+    launchMultipleTimesTable: function(lst) {
+      let questions = [];
+      for (let n of lst) {
+        questions.push(...Question.timesTableQuestions(n, false, true));
+      }
+      Question.shuffle(questions);
+      questions = questions.slice(0, this.$data.questionCount);
+      router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
+    },
     launchTimesTable: function(n) {
       let questions = Question.timesTableQuestions(n, false, true).slice(0, this.$data.questionCount);
       router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
