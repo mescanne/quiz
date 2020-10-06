@@ -28,6 +28,19 @@ function timesTableQuestions(number, withReorder, withDivide) {
   return questions;
 }
 
+function subtractionQuestions(minSum, maxSum) {
+  let questions = [];
+  for (let sum = minSum; sum < maxSum; sum++) {
+    for (let i = 0; i < sum; i++) {
+      let j = sum - i;
+      questions.push(Question(true, sum + ' - ' + i, sum + ' minus ' + i, j));
+      questions.push(Question(true, sum + ' - ' + j, sum + ' minus ' + j, i));
+    }
+  }
+  shuffle(questions);
+  return questions;
+}
+
 function addingQuestions(minSum, maxSum) {
   let questions = [];
   for (let sum = minSum; sum < maxSum; sum++) {
@@ -52,6 +65,7 @@ export default {
   Question,
   timesTableQuestions,
   addingQuestions,
+  subtractionQuestions,
   shuffle,
 }
 

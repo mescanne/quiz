@@ -7,11 +7,11 @@
                     alt="Kids Quiz"
                 >
             </b-navbar-item>
-        </template>
-        <template slot="start">
             <b-navbar-item tag="router-link" to="/">
                 Home
             </b-navbar-item>
+        </template>
+        <template slot="start">
             <b-navbar-dropdown label="Info">
                 <b-navbar-item @click="doAbout">
                     About

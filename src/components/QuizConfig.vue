@@ -12,18 +12,33 @@
     </b-field>
 
     <b-tabs>
-      <b-tab-item label="Times Table">
-      <div class="columns is-multiline is-centered is-multiline">
-        <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">2, 5, 10</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchMultipleTimesTable([2,5,10])">Launch</b-button></footer></div></div>
+      <b-tab-item label="x ÷">
+      <div class="grid-row">
         <div v-for="n in 11" :key="n">
-          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n+1 }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchTimesTable(n+1)">Launch</b-button></footer></div></div>
+          <div class="grid-item">
+            <b-button class="card-footer-item is-primary" @click="launchTimesTable(n+1)">{{ n + 1 }}</b-button>
+           </div>
+        </div>
+        <div class="grid-item">
+          <b-button class="card-footer-item is-primary" @click="launchMultipleTimesTable([2,5,10])">2, 5, 10</b-button>
         </div>
       </div>
       </b-tab-item>
-      <b-tab-item label="Adding">
-      <div class="columns is-multiine is-centered is-multiline">
-        <div v-for="n in 7" :key="n">
-          <div class="column is-narrow"><div class="card"><div class="card-content"><div class="title">{{ n + 3 }}</div></div><footer class="card-footer"><b-button class="card-footer-item is-primary" @click="launchAddingToSum(n+3)">Launch</b-button></footer></div></div>
+      <b-tab-item label="+">
+      <div class="grid-row">
+        <div v-for="n in addingList" :key="n">
+          <div class="grid-item">
+            <b-button class="card-footer-item is-primary" @click="launchAddingToSum(n)">{{ n }}</b-button>
+          </div>
+        </div>
+      </div>
+      </b-tab-item>
+      <b-tab-item label="-">
+      <div class="grid-row">
+        <div v-for="n in addingList" :key="n">
+          <div class="grid-item">
+            <b-button class="card-footer-item is-primary" @click="launchSubtractionToSum(n)">{{ n }}</b-button>
+           </div>
         </div>
       </div>
       </b-tab-item>
@@ -40,7 +55,7 @@ export default {
   name: 'QuizConfig',
   data: function() {
     return {
-      questionSets: ['a', 'b', 'c'],
+      addingList: [ 5, 10, 20, 50, 100 ],
       timesTable: [],
       withReorder: false,
       withDivision: false,
@@ -66,7 +81,11 @@ export default {
       router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
     },
     launchAddingToSum: function(n) {
-      let questions = Question.addingQuestions(n, n).slice(0, this.$data.questionCount);
+      let questions = Question.addingQuestions(Math.floor(n/2), n).slice(0, this.$data.questionCount);
+      router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
+    },
+    launchSubtractionToSum: function(n) {
+      let questions = Question.subtractionQuestions(Math.floor(n/2), n).slice(0, this.$data.questionCount);
       router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
     },
   }
@@ -76,7 +95,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.c {
-	margin: 10px 10px 10px 10px;
+
+.grid-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
 }
+
+.grid-item {
+  padding: 10px 10px 10px 10px;
+}
+
 </style>
