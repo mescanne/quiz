@@ -64,7 +64,7 @@ export default {
     }
   },
   props: {
-    questions: Array,
+    questions: Question.questionMix(),
   },
   methods: {
     launchMultipleTimesTable: function(lst) {

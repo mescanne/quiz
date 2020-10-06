@@ -1,4 +1,11 @@
 
+function QuestionSet(name, questions) {
+  return {
+    name: name,
+    questions: questions,
+  }
+}
+
 function Question(isNumber, textQuestion, spokenQuestion, answer) {
   return {
     isNumber: isNumber,
@@ -61,11 +68,47 @@ function shuffle(questions) {
   }
 }
 
+let addingList = [ 5, 10, 20, 50, 100 ];
+function addingQuestionSet() {
+  let set = [];
+  for (let n of addingList) {
+      set.push(QuestionSet(n, addingQuestions(Math.floor(n/2), n)));
+  }
+  return set;
+}
+
+function subtractionQuestionSet() {
+  let set = [];
+  for (let n of addingList) {
+      set.push(QuestionSet(n, subtractionQuestions(Math.floor(n/2), n)));
+  }
+  return set;
+}
+
+function timesTableQuestionSet() {
+  let set = [];
+  for (let n = 2; n <= 12; n++) {
+      set.push(QuestionSet(n, timesTableQuestions(n, false, true)));
+  }
+  return set;
+}
+
+function questionMix() {
+  let r = {
+    'x ÷': timesTableQuestionSet(),
+    '+': addingQuestionSet(),
+    '-': subtractionQuestionSet(),
+  };
+  console.log('question mix', r);
+  return r;
+}
+
 export default {
   Question,
   timesTableQuestions,
   addingQuestions,
   subtractionQuestions,
   shuffle,
+  questionMix,
 }
 
