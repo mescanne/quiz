@@ -56,7 +56,7 @@ export default {
       router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
     },
     launchAddingToSum: function(n) {
-      let questions = Question.addingQuestions(Math.floor(n/2), n).slice(0, this.$data.questionCount);
+      let questions = Question.addingQuestions(n, n).slice(0, this.$data.questionCount);
       router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
     },
   }
