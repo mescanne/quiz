@@ -4,7 +4,7 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import './registerServiceWorker'
 import VueRouter from 'vue-router'
-import firebase from 'firebase/app'
+import * as firebase from 'firebase/app';
 import router from './router'
 import {config} from './firebaseConfig'
 

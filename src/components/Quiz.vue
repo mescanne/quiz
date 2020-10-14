@@ -30,8 +30,15 @@ export default {
     questions: Array,
     withSound: Boolean,
   },
+  created() {
+    console.log('questions', this.questions);
+    if (this.questions == undefined || this.questions.length == 0) {
+      this.$router.push({ name: "home" });
+    } else {
+      this.nextQuestion();
+    }
+  },
   mounted() {
-    this.nextQuestion(); 
   },
   methods: {
     onEnter: function() {
