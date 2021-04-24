@@ -20,7 +20,7 @@
            </div>
         </div>
         <div class="grid-item">
-          <b-button class="card-footer-item is-primary" @click="launchMultipleTimesTable([2,5,10])">2, 5, 10</b-button>
+          <b-button class="card-footer-item is-primary" @click="launchMultipleTimesTable([2,3,4,5,8,10])">2, 3, 4, 5, 8, 10</b-button>
         </div>
       </div>
       </b-tab-item>
@@ -72,20 +72,19 @@ export default {
       for (let n of lst) {
         questions.push(...Question.timesTableQuestions(n, false, true));
       }
-      Question.shuffle(questions);
-      questions = questions.slice(0, this.$data.questionCount);
+      questions = Question.pullTopQuestions(questions, this.$data.questionCount);
       router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
     },
     launchTimesTable: function(n) {
-      let questions = Question.timesTableQuestions(n, false, true).slice(0, this.$data.questionCount);
+      let questions = Question.pullTopQuestions(Question.timesTableQuestions(n, false, true), this.$data.questionCount);
       router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
     },
     launchAddingToSum: function(n) {
-      let questions = Question.addingQuestions(Math.floor(n/2), n).slice(0, this.$data.questionCount);
+      let questions = Question.pullTopQuestions(Question.addingQuestions(Math.floor(n/2), n), this.$data.questionCount);
       router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
     },
     launchSubtractionToSum: function(n) {
-      let questions = Question.subtractionQuestions(Math.floor(n/2), n).slice(0, this.$data.questionCount);
+      let questions = Question.pullTopQuestions(Question.subtractionQuestions(Math.floor(n/2), n), this.$data.questionCount);
       router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
     },
   }

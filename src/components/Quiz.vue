@@ -16,6 +16,7 @@ export default {
   name: 'Quiz',
   data: function() {
     return {
+      startTime: undefined,
       answer: '',
       currentQuestion: 0,
       correct: 0,
@@ -35,6 +36,7 @@ export default {
     if (this.questions == undefined || this.questions.length == 0) {
       this.$router.push({ name: "home" });
     } else {
+      this.$data.startTime = new Date();
       this.nextQuestion();
     }
   },
@@ -70,9 +72,11 @@ export default {
 	let msg = 'Practice more.';
         if (perc == 1.0) {
           msg = 'Fantastic.';
-        } else if (perc >= 0.75) {
+        } else if (perc >= 0.80) {
           msg = 'Good.';
         } 
+	let seconds = Math.floor(((new Date()) - this.$data.startTime + 0.5)/1000.0);
+        msg += ' ' + seconds + ' seconds.';
         this.showStatus(this.$data.correct + ' of ' + this.questions.length + ' correct.', msg);
       }
     },
