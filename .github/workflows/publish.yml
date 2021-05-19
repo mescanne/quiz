@@ -31,7 +31,6 @@ jobs:
       # Setup environment
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.5
-        with:
 
       # Runs a set of commands using the runners shell
       - name: Build
