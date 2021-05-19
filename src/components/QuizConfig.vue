@@ -12,35 +12,14 @@
     </b-field>
 
     <b-tabs>
-      <b-tab-item label="x ÷">
-      <div class="grid-row">
-        <div v-for="n in 11" :key="n">
-          <div class="grid-item">
-            <b-button class="card-footer-item is-primary" @click="launchTimesTable(n+1)">{{ n + 1 }}</b-button>
-           </div>
-        </div>
-        <div class="grid-item">
-          <b-button class="card-footer-item is-primary" @click="launchMultipleTimesTable([2,3,4,5,8,10])">2, 3, 4, 5, 8, 10</b-button>
-        </div>
-      </div>
-      </b-tab-item>
-      <b-tab-item label="+">
-      <div class="grid-row">
-        <div v-for="n in addingList" :key="n">
-          <div class="grid-item">
-            <b-button class="card-footer-item is-primary" @click="launchAddingToSum(n)">{{ n }}</b-button>
+      <b-tab-item v-for="(item, key) in questions" :label="key" :key="key">
+        <div class="grid-row">
+          <div v-for="questionSet in item" :key="questionSet">
+            <div class="grid-item">
+              <b-button class="card-footer-item is-primary" @click="launchQuestions(questionSet.questions)">{{ questionSet.name }}</b-button>
+             </div>
           </div>
         </div>
-      </div>
-      </b-tab-item>
-      <b-tab-item label="-">
-      <div class="grid-row">
-        <div v-for="n in addingList" :key="n">
-          <div class="grid-item">
-            <b-button class="card-footer-item is-primary" @click="launchSubtractionToSum(n)">{{ n }}</b-button>
-           </div>
-        </div>
-      </div>
       </b-tab-item>
     </b-tabs>
   </div>
@@ -55,36 +34,15 @@ export default {
   name: 'QuizConfig',
   data: function() {
     return {
-      addingList: [ 5, 10, 20, 50, 100 ],
-      timesTable: [],
-      withReorder: false,
-      withDivision: false,
       withSound: true,
       questionCount: 20,
+      questions: Question.questionMix(),
     }
   },
   props: {
-    questions: Question.questionMix(),
   },
   methods: {
-    launchMultipleTimesTable: function(lst) {
-      let questions = [];
-      for (let n of lst) {
-        questions.push(...Question.timesTableQuestions(n, false, true));
-      }
-      questions = Question.pullTopQuestions(questions, this.$data.questionCount);
-      router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
-    },
-    launchTimesTable: function(n) {
-      let questions = Question.pullTopQuestions(Question.timesTableQuestions(n, false, true), this.$data.questionCount);
-      router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
-    },
-    launchAddingToSum: function(n) {
-      let questions = Question.pullTopQuestions(Question.addingQuestions(Math.floor(n/2), n), this.$data.questionCount);
-      router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
-    },
-    launchSubtractionToSum: function(n) {
-      let questions = Question.pullTopQuestions(Question.subtractionQuestions(Math.floor(n/2), n), this.$data.questionCount);
+    launchQuestions: function(questions) {
       router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
     },
   }

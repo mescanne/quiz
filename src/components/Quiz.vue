@@ -45,7 +45,6 @@ export default {
   methods: {
     onEnter: function() {
       this.$data.answerDisabled = true;
-      console.log('data: ', this.$data);
       if (this.withSound) {
         window.speechSynthesis.cancel();
       }

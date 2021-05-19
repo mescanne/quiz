@@ -1,5 +1,7 @@
 # quiz
 
+Kids Quiz is a progress web app primarily intended for mobile devices. This enables easy repetitive quizes for kids who are practicing arithmetic, multiplication, and division.
+
 ## Project setup
 ```
 npm install

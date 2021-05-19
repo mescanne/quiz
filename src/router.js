@@ -1,6 +1,4 @@
 import VueRouter from 'vue-router';
-import Auth from './components/Auth.vue';
-import AuthSuccess from './components/AuthSuccess.vue';
 //import Question from './quiz.js'
 import Quiz from './components/Quiz.vue'
 import QuizConfig from './components/QuizConfig.vue'
@@ -9,8 +7,6 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', name: 'home', component: QuizConfig },
-    { path: '/auth', component: Auth },
-    { path: '/success', component: AuthSuccess },
     { path: '/quiz', name: 'quiz', component: Quiz, props: true },
   ]
 });
