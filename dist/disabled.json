@@ -1,0 +1,15 @@
+{
+  "name": "Kids Quiz",
+  "short_name": "Kids Quiz",
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#0476F2",
+  "background_color": "#fff",
+  "icons": [
+    {
+      "src": "public/img/icons/KidsQuizLogo.svg",
+      "sizes": "151x151",
+      "type": "image/svg+xml"
+    }
+  ]
+}
