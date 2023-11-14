@@ -3,7 +3,7 @@
     <div style="padding-bottom:20px; font-size:20px; text-align:center;">{{ questionCount }}</div>
     <div style="padding-bottom:20px; text-align:center;">{{ question }}</div>
     <div style="height: 100px; display:flex; justify-content:center;">
-      <input ref="answer" v-bind:disabled="answerDisabled" class="no-spinners" style="width:5ch; height:100%; text-align:center; font-size:80px;" v-on:keyup.enter="onEnter" v-model.number="answer" type="number">
+      <input ref="answer" v-bind:disabled="answerDisabled" class="no-spinners" style="width:5ch; height:100%; text-align:center; font-size:80px;" v-on:keyup="onKey" v-on:keyup.enter="onEnter" v-model.number="answer" type="number">
     </div>
     <div style="height: 60px; font-size:40px; display:flex; text-align:center; justify-content:center; margin-top:20px; font-style: italic; font-color:gray;">{{ statusMsg }}</div>
     <div style="height: 60px; font-size:40px; display:flex; text-align:center; justify-content:center; margin-top:20px; font-style: italic; font-color:gray;">{{ explanation }}</div>
@@ -29,10 +29,13 @@ export default {
   },
   props: {
     questions: Array,
+    qCount: Number,
     withSound: Boolean,
+    singleDigit: Boolean,
   },
   created() {
     console.log('questions', this.questions);
+    console.log('questionCount', this.qCount);
     if (this.questions == undefined || this.questions.length == 0) {
       this.$router.push({ name: "home" });
     } else {
@@ -43,7 +46,15 @@ export default {
   mounted() {
   },
   methods: {
+    onKey: function() {
+      if (this.singleDigit) {
+        this.handleAnswer();
+      }
+    },
     onEnter: function() {
+      this.handleAnswer();
+    },
+    handleAnswer: function() {
       this.$data.answerDisabled = true;
       if (this.withSound) {
         window.speechSynthesis.cancel();

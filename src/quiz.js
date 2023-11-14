@@ -1,8 +1,9 @@
 
-function QuestionSet(name, questions) {
+function QuestionSet(name, questions, singleDigit) {
   return {
     name: name,
     questions: questions,
+    singleDigit: singleDigit,
   }
 }
 
@@ -102,6 +103,26 @@ function addingQuestions(minSum, maxSum) {
   return questions;
 }
 
+function numberBondQuestions(sum) {
+  let questions = [];
+  for (let n = 1; n < sum; n++) {
+    questions.push(Question(true, n + '', n + '', sum - n, 1.0));
+  }
+  questions = shuffleAndExtend(questions, 20);
+  return questions;
+}
+
+function shuffleAndExtend(questions, total) {
+  shuffle(questions);
+
+  while (questions.length < total) {
+    let additionalQuestions = [...questions];
+    shuffle(additionalQuestions);
+    questions = questions.concat(additionalQuestions);
+  }
+  return questions;
+}
+
 function shuffle(questions) {
   for (let i = questions.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -113,7 +134,7 @@ let addingList = [ 5, 10, 20, 50, 100 ];
 function addingQuestionSet() {
   let set = [];
   for (let n of addingList) {
-      set.push(QuestionSet(n, addingQuestions(Math.floor(n/2), n)));
+      set.push(QuestionSet(n, addingQuestions(Math.floor(n/2), n), false));
   }
   return set;
 }
@@ -121,7 +142,7 @@ function addingQuestionSet() {
 function subtractionQuestionSet() {
   let set = [];
   for (let n of addingList) {
-      set.push(QuestionSet(n, subtractionQuestions(Math.floor(n/2), n)));
+      set.push(QuestionSet(n, subtractionQuestions(Math.floor(n/2), n, false)));
   }
   return set;
 }
@@ -131,15 +152,24 @@ function timesTableQuestionSet() {
   for (let n = 2; n <= 12; n++) {
       set.push(QuestionSet(n, timesTableQuestions(n, false, true)));
   }
-  set.push(QuestionSet('1-5, 8, 10', timesTableQuestions([1,2,3,4,5,8,10], false, true)));
+  set.push(QuestionSet('1-5, 8, 10', timesTableQuestions([1,2,3,4,5,8,10], false, true), false));
+  return set;
+}
+
+function numberBondQuestionSet() {
+  let set = [];
+  for (let n = 10; n <= 10; n++) {
+    set.push(QuestionSet(n, numberBondQuestions(n), true));
+  }
   return set;
 }
 
 function questionMix() {
   let r = {
-    'x ÷': timesTableQuestionSet(),
+    'Bonds': numberBondQuestionSet(),
     '+': addingQuestionSet(),
     '-': subtractionQuestionSet(),
+    'x ÷': timesTableQuestionSet(),
   };
   console.log('question mix', r);
   return r;

@@ -3,11 +3,8 @@
     <b-switch v-model="withSound">Sound</b-switch>
     <b-field label="Questions">
       <b-select v-model="questionCount" placeholder="10">
-        <option value="2">2</option>
-        <option value="5">5</option>
         <option value="10">10</option>
         <option value="20">20</option>
-        <option value="50">50</option>
       </b-select>
     </b-field>
 
@@ -16,7 +13,7 @@
         <div class="grid-row">
           <div v-for="questionSet in item" :key="questionSet">
             <div class="grid-item">
-              <b-button class="card-footer-item is-primary" @click="launchQuestions(questionSet.questions)">{{ questionSet.name }}</b-button>
+              <b-button class="card-footer-item is-primary" @click="launchQuestions(questionSet.questions, questionSet.singleDigit)">{{ questionSet.name }}</b-button>
              </div>
           </div>
         </div>
@@ -42,8 +39,8 @@ export default {
   props: {
   },
   methods: {
-    launchQuestions: function(questions) {
-      router.push({ name: "quiz", params: { 'questions': questions, 'withSound': this.$data.withSound } });
+    launchQuestions: function(questions, singleDigit) {
+      router.push({ name: "quiz", params: { 'qCount': this.$data.questionCount, 'questions': questions.slice(0, this.$data.questionCount), 'withSound': this.$data.withSound, 'singleDigit': singleDigit } });
     },
   }
 }

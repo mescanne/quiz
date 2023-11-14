@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "55a72f3d2dc90f8008b9",
-    "url": "/css/app.89749a7d.css"
+    "revision": "cbe3e313d38fa5f7989f",
+    "url": "/css/app.7273974f.css"
   },
   {
-    "revision": "040f9e8a96c750383ba6",
-    "url": "/css/chunk-vendors.3ef6ec65.css"
+    "revision": "75f2f6e0d11182da4128",
+    "url": "/css/chunk-vendors.d56b364a.css"
   },
   {
     "revision": "256f2b4d4d4be7c6d6a3cc5c4f1a2877",
@@ -24,16 +24,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/KidsQuizTitle.svg"
   },
   {
-    "revision": "e8c58a59add31254ac251a726cea7278",
+    "revision": "a0da25e04bec75b69e376dc9ef7e8225",
     "url": "/index.html"
   },
   {
-    "revision": "55a72f3d2dc90f8008b9",
-    "url": "/js/app.d5de18ee.js"
+    "revision": "cbe3e313d38fa5f7989f",
+    "url": "/js/app.a483d3cc.js"
   },
   {
-    "revision": "040f9e8a96c750383ba6",
-    "url": "/js/chunk-vendors.033f3bb2.js"
+    "revision": "75f2f6e0d11182da4128",
+    "url": "/js/chunk-vendors.88dd26bf.js"
   },
   {
     "revision": "9c7dcb5bd80cf0ae7140b0a4fb8d700c",
