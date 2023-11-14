@@ -32,7 +32,7 @@ export default {
   data: function() {
     return {
       withSound: true,
-      questionCount: 20,
+      questionCount: 10,
       questions: Question.questionMix(),
     }
   },

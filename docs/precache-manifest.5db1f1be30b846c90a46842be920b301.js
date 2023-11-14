@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cbe3e313d38fa5f7989f",
-    "url": "/css/app.7273974f.css"
+    "revision": "111d2701aab7fe611eba",
+    "url": "/css/app.2af780db.css"
   },
   {
     "revision": "75f2f6e0d11182da4128",
@@ -24,12 +24,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/KidsQuizTitle.svg"
   },
   {
-    "revision": "a0da25e04bec75b69e376dc9ef7e8225",
+    "revision": "1a4920d24c7cc1e341b44a225bd61fec",
     "url": "/index.html"
   },
   {
-    "revision": "cbe3e313d38fa5f7989f",
-    "url": "/js/app.a483d3cc.js"
+    "revision": "111d2701aab7fe611eba",
+    "url": "/js/app.d03c9572.js"
   },
   {
     "revision": "75f2f6e0d11182da4128",
